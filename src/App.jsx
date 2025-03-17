@@ -1,12 +1,12 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import Header from "./components/Header";
+import DefaultLayout from "./layouts/DefaultLayout";
 
 function App() {
 
   return (
     <> 
       <BrowserRouter>
-        <Routes>
+        <Routes component={DefaultLayout} >
           <Route path="/"/>
           <Route path="movies/:id" />
         </Routes>
