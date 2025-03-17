@@ -11,7 +11,7 @@ export default function Header() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
-                            <a className="nav-link" aria-current="page" href="#">Home</a>
+                            <NavLink className="nav-link" aria-current="page" href="#">Home</NavLink>
                         </div>
                     </div>
                 </div>
