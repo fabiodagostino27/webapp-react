@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 export default function Movie() {
-    const {id} = useParams();
+    const { id } = useParams();
     const [movie, setMovie] = useState({});
 
     const fetchMovie = () => {
@@ -11,7 +11,7 @@ export default function Movie() {
             .then(data => setMovie(data))
     };
 
-    useEffect(fetchMovie, [])
+    useEffect(fetchMovie, []);
 
     return (
         <main className="container my-4">
@@ -28,6 +28,20 @@ export default function Movie() {
                     <h3 className="mt-3">Abstract</h3>
                     <p>{movie.abstract}</p>
                 </div>
+            </div>
+            <div>
+                <h3>Reviews</h3>
+                <ul className="list-group list-group-flush">
+                    {movie.reviews?.map(r => {
+                        return(
+                            <li className="list-group-item py-3">
+                                <h5><em>Review by: </em>{r.name}</h5>
+                                <p>{r.text}</p>
+                                <span><strong>Voto: </strong>{r.vote}</span>
+                            </li>
+                        )
+                    })}
+                </ul>
             </div>
         </main>
     )
