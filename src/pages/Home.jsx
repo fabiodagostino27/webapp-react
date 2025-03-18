@@ -13,9 +13,9 @@ export default function Home() {
     useEffect(fetchMovies, []);
 
     return (
-        <main className="container">
+        <main className="container my-4">
             <h1>Lista Film</h1>
-            <div>
+            <div className="row">
                 {movies.map(movie => <MovieCard key={movie.id} movie={movie} />)}
             </div>
         </main>
