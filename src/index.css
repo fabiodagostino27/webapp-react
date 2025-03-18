@@ -9,3 +9,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.single-movie > figure {
+    border-right: 2px solid black;
+}
