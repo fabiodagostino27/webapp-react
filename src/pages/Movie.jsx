@@ -34,7 +34,7 @@ export default function Movie() {
                 <ul className="list-group list-group-flush">
                     {movie.reviews?.map(r => {
                         return(
-                            <li className="list-group-item py-3">
+                            <li key={r.id} className="list-group-item py-3">
                                 <h5><em>Review by: </em>{r.name}</h5>
                                 <p>{r.text}</p>
                                 <span><strong>Voto: </strong>{r.vote}</span>
