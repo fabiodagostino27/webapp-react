@@ -26,7 +26,7 @@ export default function Movie() {
         );
     };
 
-    useEffect(fetchMovie, []);
+    useEffect(fetchMovie, [id]);
 
     return (
         <main className="container my-4">
@@ -47,18 +47,10 @@ export default function Movie() {
             <div>
                 <h3>Reviews</h3>
                 <ul className="list-group list-group-flush">
-                    {movie.reviews?.map(r => {
-                        return(
-                            <li key={r.id} className="list-group-item py-3">
-                                <h5><em>Review by: </em>{r.name}</h5>
-                                <p>{r.text}</p>
-                                <span><strong>Voto: </strong>{r.vote}</span>
-                            </li>
-                        )
-                    })}
+                    {renderReviews()}
                 </ul>
             </div>
-            <AddReviewForm  />
+            <AddReviewForm fetchMovie={fetchMovie} />
         </main>
     )
 }

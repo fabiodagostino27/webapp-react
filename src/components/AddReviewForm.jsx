@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddReviewForm() {
+export default function AddReviewForm({fetchMovie}) {
     const initialValue = {
         name: "",
         text: "",
@@ -19,6 +19,7 @@ export default function AddReviewForm() {
             },
             body: JSON.stringify(formData)
         })
+            .then(fetchMovie())
             .catch(err => console.log(err))
         };
         
