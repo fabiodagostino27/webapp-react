@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import AddReviewForm from "../components/AddReviewForm";
 
 export default function Movie() {
     const { id } = useParams();
@@ -9,6 +10,20 @@ export default function Movie() {
         fetch(`http://localhost:3000/movies/${id}`)
             .then(res => res.json())
             .then(data => setMovie(data))
+    };
+
+    const renderReviews = () => {
+        return (
+            movie.reviews?.map(r => {
+                return(
+                    <li key={r.id} className="list-group-item py-3">
+                        <h5><em>Review by: </em>{r.name}</h5>
+                        <p>{r.text}</p>
+                        <span><strong>Voto: </strong>{r.vote}</span>
+                    </li>
+                )
+            })
+        );
     };
 
     useEffect(fetchMovie, []);
@@ -43,6 +58,7 @@ export default function Movie() {
                     })}
                 </ul>
             </div>
+            <AddReviewForm  />
         </main>
     )
 }

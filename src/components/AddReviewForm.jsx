@@ -4,10 +4,31 @@ export default function AddReviewForm() {
     const initialValue = {
         name: "",
         text: "",
-        vote: null
+        vote: 1
     };
     
     const [formData, setFormData] = useState(initialValue);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        fetch("http://localhost:3000/movies/2/reviews", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+            .catch(err => console.log(err))
+        };
+        
+        const setFieldValue = (e) => {
+            const {name, value} = e.target;
+            setFormData({
+                ...formData,
+                [name]: value
+            })
+        };
 
     return (
         <div className="container">
@@ -19,26 +40,29 @@ export default function AddReviewForm() {
                         type="text"
                         className="form-control"
                         id="name"
+                        name="name"
                         value={formData.name}
                         onChange={setFieldValue}  />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Review</label>
+                    <label htmlFor="text" className="form-label">Review</label>
                     <textarea
                         className="form-control"
-                        id="name"
+                        id="text"
+                        name="text"
                         value={formData.text}
                         onChange={setFieldValue}  />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Review</label>
+                    <label htmlFor="vote" className="form-label">Vote</label>
                     <input
                         type="number"
                         min={1}
                         max={5}
                         className="form-control"
-                        id="name"
-                        value={formData.text}
+                        id="vote"
+                        name="vote"
+                        value={formData.vote}
                         onChange={setFieldValue}  />
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
