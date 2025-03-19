@@ -50,7 +50,7 @@ export default function Movie() {
                     {renderReviews()}
                 </ul>
             </div>
-            <AddReviewForm fetchMovie={fetchMovie} />
+            <AddReviewForm fetchMovie={fetchMovie} movieId={movie.id} />
         </main>
     )
 }

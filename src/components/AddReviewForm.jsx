@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddReviewForm({fetchMovie}) {
+export default function AddReviewForm({movieId, fetchMovie}) {
     const initialValue = {
         name: "",
         text: "",
@@ -12,7 +12,7 @@ export default function AddReviewForm({fetchMovie}) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch("http://localhost:3000/movies/2/reviews", {
+        fetch(`http://localhost:3000/movies/${movieId}/reviews`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
