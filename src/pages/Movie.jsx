@@ -1,15 +1,22 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AddReviewForm from "../components/AddReviewForm";
+import { useContext } from "react";
+import GlobalContext from "../contexts/GlobalContext";
 
 export default function Movie() {
+    const {setIsLoading} = useContext(GlobalContext);
     const { id } = useParams();
     const [movie, setMovie] = useState({});
 
     const fetchMovie = () => {
+        setIsLoading(true);
+
         fetch(`http://localhost:3000/movies/${id}`)
             .then(res => res.json())
             .then(data => setMovie(data))
+            .then(err => console.log(err))
+            .then(() => setIsLoading(false))
     };
 
     const renderReviews = () => {
