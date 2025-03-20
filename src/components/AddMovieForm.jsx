@@ -1,29 +1,68 @@
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AddMovieForm() {
+    const navigate = useNavigate();
+
     const initialValue = {
         title: "",
         director: "",
         genre: "",
-        release_year: null,
+        release_year: 0,
         abstract: "",
-        image: ""
+        image: null
     };
 
     const [formData, setFormData] = useState(initialValue);
 
     const setFieldValue = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        })
+
+        if (name === "image") {
+            setFormData({
+                ...formData,
+                image: e.target.files[0]
+            })
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value
+            })
+        }
+    };
+
+
+    //doesn't work
+    //const handleSubmit = (e) => {
+    //    e.preventDefault();
+
+    //    fetch(`http://localhost:3000/movies`, {
+    //        method: "POST",
+    //        body: formData
+    //    })
+    //        .catch(err => console.log(err))
+    //};
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        axios
+            .post('http://localhost:3000/movies', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then(() => {
+                navigate('/');
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
         <main className="container my-4">
             <h1>Add Movie</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="row g-2">
                     <div className="col-6">
                         <label htmlFor="title" className="form-label">Title</label>
@@ -80,8 +119,8 @@ export default function AddMovieForm() {
 
                     <div>
                         <label htmlFor="image" className="form-label">Movie cover</label>
-                        <input 
-                            type="file" 
+                        <input
+                            type="file"
                             className="form-control"
                             name="image"
                             onChange={setFieldValue}
