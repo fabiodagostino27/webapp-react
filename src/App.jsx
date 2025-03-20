@@ -12,6 +12,7 @@ function App() {
           <Route Component={DefaultLayout} >
             <Route path="/" Component={Home} />
             <Route path="movies/:id" Component={Movie} />
+            
           </Route>
         </Routes>
       </BrowserRouter>
